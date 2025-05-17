@@ -28,6 +28,8 @@ class BluetoothViewModel : ViewModel() {
 
     var isConnected by mutableStateOf(false)
         private set
+    var connectedDevice by mutableStateOf<BluetoothDevice?>(null)
+        private set
 
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private var bluetoothSocket: BluetoothSocket? = null
@@ -98,6 +100,7 @@ class BluetoothViewModel : ViewModel() {
                 bluetoothSocket = socket
                 outputStream = socket.outputStream
                 isConnected = true
+                connectedDevice = device
                 Log.d("BluetoothViewModel", "Connected to ${device.name}")
             } catch (e: Exception) {
                 e.printStackTrace()
